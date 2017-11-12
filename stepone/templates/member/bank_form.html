@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}取引先{% if object %}更新{% else %}作成{% endif %}{% endblock title %}
+
+{% block container_main %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-box-large">
+        {% comment %}
+          <div class="panel-heading">
+            <div class="panel-title">作成・更新</div>
+          </div>
+        {% endcomment %}
+        <div class="panel-body">
+          <p>은행</p>
+          <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form layout='table' %}
+            <button id="id_button_submit" type="submit" class="btn btn-primary">{% if object %}更新{% else %}作成{% endif %}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+{% endblock container_main %}

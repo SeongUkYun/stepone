@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ja">
+  <head>
+    {% block meta %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+
+    <title>{% block title_container %}{% block title %}{% endblock title %} | ecms{% endblock title_container %}</title>
+    {% block css %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+      <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+      <link href="{% static 'css/staff.css' %}" rel="stylesheet">
+    {% endblock css %}
+    {% block script_head %}
+      <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    {% endblock script_head %}
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi" aria-controls="navbar">
+            <span class="sr-only">メニュー</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{% block sitename %}ecms{% endblock sitename %}</a>
+        </div>
+        
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">在庫管理 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">売上管理 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">取引 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">月次 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">申請/承認 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">その他 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">アカウント<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block messages %}
+      {% if messages %}
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              {% for message in messages %}
+                <div class="alert {% if message.tags %} {{ message.tags }}{% endif %} alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ message }}
+                </div>
+              {% endfor %}
+              {% comment %}
+              <ul id="messages" class="messages alert alert-info">
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              </ul>
+              {% endcomment %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endblock messages %}
+
+    {% block container_enclose %}
+      <div class="page-content">
+        {% block container %}
+          <div class="row">
+            <div class="col-md-{% block sidebar_row %}2{% endblock sidebar_row %}">
+              {% block container_leftside %}{% endblock container_leftside %}
+            </div>
+            <div class="col-md-{% block main_row %}10{% endblock main_row %}">
+              {% block container_main %}{% endblock container_main %}
+            </div>
+          </div>
+        {% endblock %}
+      </div>
+    {% endblock container_enclose %}
+
+    {% block footer_enclose %}
+      <hr/>
+      <div class="footer navbar navbar-bottom">
+        {% block footer %}
+          <div class="container">
+            <div class="copy text-center">
+              Copyright (C) SEI Co.,Ltd . All Rights Reserved
+            </div>
+          </div>
+        {% endblock footer %}
+      </div>
+    {% endblock footer_enclose %}
+
+    {% block script_end_body %}
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>      
+    {% endblock script_end_body %}
+  </body>
+</html>
+
+
